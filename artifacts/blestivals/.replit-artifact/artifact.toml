@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "BlessTivals"
+description = "An editorial event-styling website for BlessTivals, presenting event services and supplied event footage for visitors in Mumbai, Navi Mumbai, and nearby areas."
+version = "1.0.0"
+id = "artifacts/blestivals"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20581
+
+[services.development]
+run = "pnpm --filter @workspace/blestivals run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/blestivals", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/blestivals/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20581"
+BASE_PATH = "/"
