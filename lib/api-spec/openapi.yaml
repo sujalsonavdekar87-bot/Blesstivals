@@ -10,6 +10,12 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: site
+    description: Public website content and enquiry submission
+  - name: admin
+    description: Authenticated client administration
+  - name: storage
+    description: Event image uploads and delivery
 paths:
   /healthz:
     get:
@@ -24,6 +30,288 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /public/content:
+    get:
+      operationId: getPublicContent
+      tags: [site]
+      summary: Get editable public site content
+      responses:
+        "200":
+          description: Public website content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteContent"
+        "500":
+          description: Could not load site content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /public/inquiries:
+    post:
+      operationId: createPublicInquiry
+      tags: [site]
+      summary: Submit an event enquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInquiryBody"
+      responses:
+        "201":
+          description: Enquiry received
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inquiry"
+        "400":
+          description: Invalid enquiry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /admin/content:
+    put:
+      operationId: updateAdminContent
+      tags: [admin]
+      summary: Update public website content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SiteContent"
+      responses:
+        "200":
+          description: Updated public content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteContent"
+        "401":
+          description: Sign in is required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "403":
+          description: User is not an authorized admin
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "503":
+          description: Admin access has not been configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /admin/inquiries:
+    get:
+      operationId: listAdminInquiries
+      tags: [admin]
+      summary: List event enquiries
+      responses:
+        "200":
+          description: Enquiries ordered newest first
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Inquiry"
+        "401":
+          description: Sign in is required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "403":
+          description: User is not an authorized admin
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "503":
+          description: Admin access has not been configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /admin/inquiries/{id}:
+    patch:
+      operationId: updateAdminInquiry
+      tags: [admin]
+      summary: Change an enquiry status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateInquiryStatusBody"
+      responses:
+        "200":
+          description: Updated enquiry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inquiry"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "401":
+          description: Sign in is required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "403":
+          description: User is not an authorized admin
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "404":
+          description: Enquiry not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "503":
+          description: Admin access has not been configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /storage/uploads/request-url:
+    post:
+      operationId: requestImageUploadUrl
+      tags: [storage]
+      summary: Request a signed URL for an event image
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UploadUrlRequest"
+      responses:
+        "200":
+          description: Signed upload URL generated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadUrlResponse"
+        "400":
+          description: Invalid image metadata
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "401":
+          description: Sign in is required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "403":
+          description: User is not an authorized admin
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "503":
+          description: Admin access has not been configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /storage/uploads/publish:
+    post:
+      operationId: publishImageUpload
+      tags: [storage]
+      summary: Publish an uploaded event image
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PublishUploadBody"
+      responses:
+        "200":
+          description: Public image path
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublishUploadResponse"
+        "400":
+          description: Invalid or unsupported uploaded image
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "401":
+          description: Sign in is required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "403":
+          description: User is not an authorized admin
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "503":
+          description: Admin access has not been configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+  /storage/objects/{objectPath}:
+    get:
+      operationId: getEventImage
+      tags: [storage]
+      summary: Serve a published event image
+      parameters:
+        - name: objectPath
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Image content
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/webp:
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: Image not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +321,211 @@ components:
           type: string
       required:
         - status
+    ErrorEnvelope:
+      type: object
+      properties:
+        error:
+          type: string
+      required: [error]
+    SiteContent:
+      type: object
+      properties:
+        heroTitle:
+          type: string
+          maxLength: 90
+        heroAccent:
+          type: string
+          maxLength: 90
+        heroBody:
+          type: string
+          maxLength: 600
+        heroImagePath:
+          type: string
+          maxLength: 2048
+        approachTitle:
+          type: string
+          maxLength: 160
+        approachBody:
+          type: string
+          maxLength: 1000
+        servicesHeading:
+          type: string
+          maxLength: 120
+        services:
+          type: array
+          maxItems: 12
+          items:
+            $ref: "#/components/schemas/ServiceItem"
+        galleryHeading:
+          type: string
+          maxLength: 120
+        gallery:
+          type: array
+          maxItems: 24
+          items:
+            $ref: "#/components/schemas/GalleryItem"
+        contactPhone:
+          type: string
+          pattern: "^[0-9+() -]{7,24}$"
+        instagramHandle:
+          type: string
+          maxLength: 64
+        instagramUrl:
+          type: string
+          format: uri
+          maxLength: 2048
+        serviceArea:
+          type: string
+          maxLength: 160
+      required:
+        - heroTitle
+        - heroAccent
+        - heroBody
+        - heroImagePath
+        - approachTitle
+        - approachBody
+        - servicesHeading
+        - services
+        - galleryHeading
+        - gallery
+        - contactPhone
+        - instagramHandle
+        - instagramUrl
+        - serviceArea
+    ServiceItem:
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 64
+        title:
+          type: string
+          maxLength: 120
+        tag:
+          type: string
+          maxLength: 120
+        body:
+          type: string
+          maxLength: 1200
+      required: [id, title, tag, body]
+    GalleryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 64
+        imagePath:
+          type: string
+          maxLength: 2048
+        altText:
+          type: string
+          maxLength: 240
+        caption:
+          type: string
+          maxLength: 240
+      required: [id, imagePath, altText, caption]
+    CreateInquiryBody:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 120
+        phone:
+          type: string
+          minLength: 7
+          maxLength: 32
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        eventType:
+          type: string
+          minLength: 2
+          maxLength: 120
+        eventDate:
+          type: string
+          maxLength: 32
+        location:
+          type: string
+          maxLength: 180
+        message:
+          type: string
+          minLength: 10
+          maxLength: 3000
+        website:
+          type: string
+          maxLength: 200
+      required: [name, phone, eventType, message]
+    Inquiry:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        eventType:
+          type: string
+        eventDate:
+          type: string
+        location:
+          type: string
+        message:
+          type: string
+        status:
+          type: string
+          enum: [new, in_progress, closed]
+        createdAt:
+          type: string
+          format: date-time
+      required: [id, name, phone, email, eventType, eventDate, location, message, status, createdAt]
+    UpdateInquiryStatusBody:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [new, in_progress, closed]
+      required: [status]
+    UploadUrlRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 255
+        size:
+          type: integer
+          minimum: 1
+          maximum: 10485760
+        contentType:
+          type: string
+          enum: [image/jpeg, image/png, image/webp]
+      required: [name, size, contentType]
+    UploadUrlResponse:
+      type: object
+      properties:
+        uploadURL:
+          type: string
+          format: uri
+        objectPath:
+          type: string
+      required: [uploadURL, objectPath]
+    PublishUploadBody:
+      type: object
+      properties:
+        objectPath:
+          type: string
+          minLength: 1
+          maxLength: 2048
+      required: [objectPath]
+    PublishUploadResponse:
+      type: object
+      properties:
+        imagePath:
+          type: string
+      required: [imagePath]
 
