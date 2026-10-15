@@ -1,7 +1,16 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { useGetPublicContent, type SiteContent } from "@workspace/api-client-react";
+import { DEFAULT_SITE_CONTENT } from "./default-site-content";
 
 const SiteContentContext = createContext<SiteContent | null>(null);
+
+function isSiteContent(value: unknown): value is SiteContent {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    typeof (value as SiteContent).contactPhone === "string"
+  );
+}
 
 export function SiteContentProvider({ children }: { children: ReactNode }) {
   const query = useGetPublicContent();
@@ -17,6 +26,18 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
           Loading BLESSTIVALS…
         </div>
       </main>
+    );
+  }
+
+  const content = isSiteContent(query.data) ? query.data : DEFAULT_SITE_CONTENT;
+
+  // When the API server is unreachable (e.g. a frontend-only preview), requests
+  // fall through to index.html, so fall back to the bundled default content.
+  if (import.meta.env.DEV || isSiteContent(query.data) || !query.isError) {
+    return (
+      <SiteContentContext.Provider value={content}>
+        {children}
+      </SiteContentContext.Provider>
     );
   }
 
