@@ -21,3 +21,8 @@ timeoutMs = 20000
 
 [nix]
 channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+BLESSTIVALS_ADMIN_EMAILS = "sujalsonavdekar87@gmail.com,ingoleashish2000@gmail.com"
