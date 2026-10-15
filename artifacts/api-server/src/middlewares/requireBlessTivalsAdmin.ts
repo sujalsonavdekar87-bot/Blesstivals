@@ -4,7 +4,7 @@ import { logger } from "../lib/logger";
 
 function allowedAdminEmails(): Set<string> {
   return new Set(
-    (process.env.BLESTITVALS_ADMIN_EMAILS ?? "")
+    (process.env.BLESSTIVALS_ADMIN_EMAILS ?? "")
       .split(",")
       .map((email) => email.trim().toLowerCase())
       .filter(Boolean),
