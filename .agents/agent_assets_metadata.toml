@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "bzx8fsgsS_-_Kc0AJMAnn"
+uri = "file://generated-artifacts/blesstivals-source.zip"
+type = "unspecified"
+title = "BlessTivals — full project source"
+description = "Complete Replit workspace source with the frontend, API server, shared packages, project configuration, and required public assets. Dependencies, build output, environment files, and Replit-private metadata are excluded."
+logical_id = "d2af68c8-1dfe-4299-b0be-a3a647971e88"
+content_hash = "sha256:c55675d2dc49e8c433fcf58a3bf70b8b232635cdd0bd0608a470113827eb267c"
+size = 3870024
+mtime_ms = 1792050675396
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:687c135f-646b-4840-9149-0fae64432927/d2af68c8-1dfe-4299-b0be-a3a647971e88/2b23fa04-4ad9-4d93-af50-b8ad7dd3cf89"
+storage_version_token = "1792050688989282"
+content_type = "application/octet-stream"
