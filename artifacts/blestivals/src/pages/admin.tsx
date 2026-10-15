@@ -353,9 +353,7 @@ export function AdminPage() {
       <header className="border-b border-[#e3d8c9] bg-[#faf7f0]">
         <div className="mx-auto flex min-h-[76px] max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-7 lg:px-10">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#c99772]/55 text-[#a54e5b]">
-              <span className="font-serif text-[25px] leading-none">B</span>
-            </div>
+            <img src="/logo.png" alt="" width={44} height={44} className="h-11 w-11 shrink-0 rounded-full shadow-[0_0_0_1px_rgba(201,151,114,.35)]" />
             <div>
               <p className="font-serif text-[20px] leading-tight tracking-[-.04em]">BlessTivals</p>
               <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[.19em] text-[#88776b]">Client workspace</p>

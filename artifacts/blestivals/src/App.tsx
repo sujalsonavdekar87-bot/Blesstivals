@@ -5,7 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
 import { Link, Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
-import { ArrowDown, ArrowRight, ArrowUpRight, Menu, X, Instagram, Phone, Sparkles } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, Menu, X, Instagram, Phone } from 'lucide-react';
 import { useState } from 'react';
 import { ClerkProvider, useAuth, useClerk } from '@clerk/react';
 import { publishableKeyFromHost } from '@clerk/react/internal';
@@ -61,10 +61,7 @@ function PageMeta({ title, description, ogTitle = title, ogDescription = descrip
 function Mark() {
   return (
     <Link href="/" className="inline-flex items-center gap-3" aria-label="BlessTivals home">
-      <span className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#a54e5b]/35 text-[#a54e5b]">
-        <span className="serif text-[25px] leading-none">B</span>
-        <span className="absolute -right-1 -top-1 text-[#c88954]"><Sparkles size={12} strokeWidth={1.5} /></span>
-      </span>
+      <img src="/logo.png" alt="" width={48} height={48} className="h-12 w-12 shrink-0 rounded-full shadow-[0_0_0_1px_rgba(165,78,91,.18)]" />
       <span className="leading-tight">
         <span className="serif block text-[21px] tracking-[-.04em]">BlessTivals</span>
         <span className="eyebrow block text-[7px] tracking-[.24em] text-[#806e61]">Event styling & planning</span>
