@@ -40,7 +40,7 @@ function AuthShell({ children }: { children: ReactNode }) {
       <div className="relative z-10 mb-8 text-center">
         <Link href="/" className="inline-flex items-center gap-3">
           <img src="/logo.png" alt="" width={48} height={48} className="h-12 w-12 shrink-0 rounded-full shadow-[0_0_0_1px_rgba(165,78,91,.18)]" />
-          <span className="serif text-[25px] tracking-[-.04em]">BlessTivals</span>
+          <span className="serif text-[22px] tracking-[.08em]">BLESSTIVALS</span>
         </Link>
         <p className="eyebrow mt-5 text-[#a54e5b]">Client admin</p>
       </div>

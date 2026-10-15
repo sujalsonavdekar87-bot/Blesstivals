@@ -331,7 +331,7 @@ export function AdminPage() {
     return (
       <main className="flex min-h-[100dvh] items-center justify-center bg-[#f4efe6] px-5 py-12 text-[#3b2b2b]">
         <section className={`${cardClass} w-full max-w-lg p-7 sm:p-9`}>
-          <p className="text-[10px] font-bold uppercase tracking-[.2em] text-[#a54e5b]">BlessTivals / Admin</p>
+          <p className="text-[10px] font-bold uppercase tracking-[.2em] text-[#a54e5b]">BLESSTIVALS / Admin</p>
           <h1 className="mt-4 font-serif text-3xl">This account isn’t approved yet.</h1>
           <p className="mt-3 text-sm leading-6 text-[#796b61]">
             A verified email must be added to the site’s admin access list before this account can manage content or enquiries.
@@ -355,7 +355,7 @@ export function AdminPage() {
           <div className="flex items-center gap-3">
             <img src="/logo.png" alt="" width={44} height={44} className="h-11 w-11 shrink-0 rounded-full shadow-[0_0_0_1px_rgba(201,151,114,.35)]" />
             <div>
-              <p className="font-serif text-[20px] leading-tight tracking-[-.04em]">BlessTivals</p>
+              <p className="font-serif text-[17px] leading-tight tracking-[.08em]">BLESSTIVALS</p>
               <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[.19em] text-[#88776b]">Client workspace</p>
             </div>
           </div>
@@ -366,7 +366,7 @@ export function AdminPage() {
           <button
             type="button"
             onClick={() => void signOut().then(() => setLocation('/sign-in'))}
-            aria-label="Sign out of the BlessTivals admin"
+            aria-label="Sign out of the BLESSTIVALS admin"
             title="Sign out"
             className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[#e5d8c7] bg-[#fffdf8] px-3 text-[11px] font-semibold text-[#74675d] transition hover:border-[#a54e5b] hover:text-[#a54e5b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a54e5b]"
           >
@@ -402,7 +402,7 @@ export function AdminPage() {
           </nav>
           <div className="mt-10 hidden rounded-2xl border border-[#e5d9ca] bg-[#f3eadc] p-4 lg:block">
             <p className="font-serif text-[18px] leading-snug">A little care, in all the right places.</p>
-            <p className="mt-2 text-[11px] leading-5 text-[#827368]">Updates here shape what visitors see on the BlessTivals website.</p>
+            <p className="mt-2 text-[11px] leading-5 text-[#827368]">Updates here shape what visitors see on the BLESSTIVALS website.</p>
             <div className="mt-4 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[.14em] text-[#a54e5b]">
               <span className="h-px w-5 bg-[#b87874]" /> Thoughtfully yours
             </div>
@@ -412,7 +412,7 @@ export function AdminPage() {
         <main className="min-w-0 px-4 py-7 sm:px-7 sm:py-9 lg:px-10 lg:py-10">
           <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-[10px] font-bold uppercase tracking-[.2em] text-[#a54e5b]">BLESTIVALS / ADMIN</p>
+              <p className="text-[10px] font-bold uppercase tracking-[.2em] text-[#a54e5b]">BLESSTIVALS / ADMIN</p>
               <h1 className="mt-2 font-serif text-[clamp(2rem,4vw,3.2rem)] leading-tight tracking-[-.045em]">
                 {tab === 'overview' ? 'Good to see you.' : tab === 'content' ? 'Shape the website.' : 'The enquiry inbox.'}
               </h1>
@@ -804,7 +804,7 @@ export function AdminPage() {
           )}
 
           <footer className="mt-10 flex flex-col gap-2 border-t border-[#e4d9cb] pt-5 text-[10px] text-[#95867a] sm:flex-row sm:items-center sm:justify-between">
-            <span className="font-semibold uppercase tracking-[.13em]">BlessTivals · Events that feel like you</span>
+            <span className="font-semibold uppercase tracking-[.13em]">BLESSTIVALS · Events that feel like you</span>
             <span className="inline-flex items-center gap-1.5"><Instagram size={12} /> A thoughtful workspace for your public site</span>
           </footer>
         </main>

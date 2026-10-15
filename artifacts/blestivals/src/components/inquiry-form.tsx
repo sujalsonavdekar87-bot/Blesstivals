@@ -78,7 +78,7 @@ export function InquiryForm({ services }: { services: ServiceItem[] }) {
         <p className="eyebrow text-[#a54e5b]">Share a few details</p>
         <h3 className="serif mt-3 text-3xl">Start an enquiry.</h3>
         <p className="mt-3 text-sm leading-6 text-[#71635b]">
-          Tell us a little about the occasion. The BlessTivals team will follow
+          Tell us a little about the occasion. The BLESSTIVALS team will follow
           up with you directly.
         </p>
       </div>

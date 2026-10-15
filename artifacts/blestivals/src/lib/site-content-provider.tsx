@@ -14,7 +14,7 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
       >
         <div className="flex items-center gap-3 text-sm text-[#71635b]">
           <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#d9cfc0] border-t-[#a54e5b]" />
-          Loading BlessTivals…
+          Loading BLESSTIVALS…
         </div>
       </main>
     );

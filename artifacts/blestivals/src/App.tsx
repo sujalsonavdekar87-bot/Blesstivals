@@ -60,10 +60,10 @@ function PageMeta({ title, description, ogTitle = title, ogDescription = descrip
 
 function Mark() {
   return (
-    <Link href="/" className="inline-flex items-center gap-3" aria-label="BlessTivals home">
+    <Link href="/" className="inline-flex items-center gap-3" aria-label="BLESSTIVALS home">
       <img src="/logo.png" alt="" width={48} height={48} className="h-12 w-12 shrink-0 rounded-full shadow-[0_0_0_1px_rgba(165,78,91,.18)]" />
       <span className="leading-tight">
-        <span className="serif block text-[21px] tracking-[-.04em]">BlessTivals</span>
+        <span className="serif block text-[18px] tracking-[.08em] md:text-[20px]">BLESSTIVALS</span>
         <span className="eyebrow block text-[7px] tracking-[.24em] text-[#806e61]">Event styling & planning</span>
       </span>
     </Link>
@@ -141,8 +141,8 @@ function Footer() {
         </div>
       </div>
       <div className="mx-auto flex max-w-[1440px] flex-col gap-2 border-t border-white/15 px-6 py-5 text-[10px] tracking-[.08em] text-[#b5a399] md:flex-row md:items-center md:justify-between md:px-12 lg:px-16">
-        <span>BLESTIVALS · EVENTS THAT FEEL LIKE YOU</span>
-        <span>© {new Date().getFullYear()} BlessTivals</span>
+        <span>BLESSTIVALS · EVENTS THAT FEEL LIKE YOU</span>
+        <span>© {new Date().getFullYear()} BLESSTIVALS</span>
       </div>
     </footer>
   );
@@ -175,7 +175,7 @@ function Home() {
   const content = useSiteContent();
   return (
     <div className="page-in">
-      <PageMeta title="BlessTivals | Events, with feeling" description="Event planning and styling in Mumbai, Navi Mumbai and nearby areas. Weddings, corporate gatherings, private celebrations and more." />
+      <PageMeta title="BLESSTIVALS | Events, with feeling" description="Event planning and styling in Mumbai, Navi Mumbai and nearby areas. Weddings, corporate gatherings, private celebrations and more." />
       <section className="relative overflow-hidden bg-[#f7f3eb]">
         <div className="mx-auto grid min-h-[680px] max-w-[1440px] md:min-h-[720px] md:grid-cols-[.92fr_1.08fr]">
           <div className="relative z-10 flex flex-col justify-center px-6 pb-12 pt-16 md:px-12 md:py-20 lg:pl-20 lg:pr-8">
@@ -205,7 +205,7 @@ function Home() {
 
       <section className="bg-[#e9dfd0] px-6 py-20 md:px-12 md:py-28">
         <div className="mx-auto grid max-w-[1220px] gap-12 md:grid-cols-[.8fr_1.2fr] md:gap-24">
-          <div><p className="eyebrow text-[#a54e5b]">The BlessTivals point of view</p><p className="serif mt-5 whitespace-pre-line text-[clamp(2.4rem,4.3vw,4.2rem)] leading-[1.05]">{content.approachTitle}</p></div>
+          <div><p className="eyebrow text-[#a54e5b]">The BLESSTIVALS point of view</p><p className="serif mt-5 whitespace-pre-line text-[clamp(2.4rem,4.3vw,4.2rem)] leading-[1.05]">{content.approachTitle}</p></div>
           <div className="self-end"><p className="text-[16px] leading-8 text-[#655950]">{content.approachBody}</p><Link href="/work" className="underline-link mt-8 inline-flex items-center gap-3 text-[12px] font-semibold tracking-[.1em] text-[#a54e5b]">GET TO KNOW OUR APPROACH <ArrowRight size={14} /></Link></div>
         </div>
       </section>
@@ -270,7 +270,7 @@ function Services() {
   const content = useSiteContent();
   return (
     <div className="page-in">
-      <PageMeta title="Event Services in Mumbai | BlessTivals" description="Weddings, corporate functions, private celebrations, shows, concerts and exhibitions—planned and styled by BlessTivals in Mumbai and nearby." />
+      <PageMeta title="Event Services in Mumbai | BLESSTIVALS" description="Weddings, corporate functions, private celebrations, shows, concerts and exhibitions—planned and styled by BLESSTIVALS in Mumbai and nearby." />
       <PageIntro kicker="What we bring to the table" title={<>One occasion.<br /><i>All the right details.</i></>} text="Our work spans different kinds of gatherings, but the starting point stays the same: understand what matters to you, then plan with care." />
       <section className="bg-[#f7f3eb] px-6 py-10 md:px-12 md:py-16">
         <div className="mx-auto max-w-[1220px]">
@@ -293,7 +293,7 @@ function Work() {
   const content = useSiteContent();
   return (
     <div className="page-in">
-      <PageMeta title="Work | BlessTivals" description="A supplied event reel, presented without invented client, venue, date or occasion details." />
+      <PageMeta title="Work | BLESSTIVALS" description="A supplied event reel, presented without invented client, venue, date or occasion details." />
       <PageIntro kicker="A supplied event reel" title={<>A moment in<br /><i>the making.</i></>} text="This short event reel offers a glimpse of décor and celebration details. It’s shared without client, venue or occasion details that weren’t provided." />
       <section className="bg-[#3b2b2b] px-6 py-16 text-[#f6ede0] md:px-12 md:py-24">
         <div className="mx-auto max-w-[1220px]">
@@ -335,14 +335,14 @@ function Contact() {
   const phoneHref = phoneHrefFor(content.contactPhone);
   return (
     <div className="page-in">
-      <PageMeta title="Contact BlessTivals | Start a conversation" description={`Talk with BlessTivals about your event in ${content.serviceArea}. Call ${content.contactPhone} or connect on Instagram.`} />
+      <PageMeta title="Contact BLESSTIVALS | Start a conversation" description={`Talk with BLESSTIVALS about your event in ${content.serviceArea}. Call ${content.contactPhone} or connect on Instagram.`} />
       <PageIntro kicker="A good beginning" title={<>Tell us what<br /><i>you have in mind.</i></>} text="Have an occasion taking shape? Call or reach out on Instagram. We’d love to hear what you’re gathering for." />
       <section className="bg-[#f7f3eb] px-6 py-16 md:px-12 md:py-24">
         <div className="mx-auto grid max-w-[1220px] gap-12 md:grid-cols-[1fr_.8fr]">
           <div><p className="eyebrow text-[#a54e5b]">Direct, simple, human</p><h2 className="serif mt-5 text-[clamp(2.8rem,5vw,5rem)] leading-[1.02]">Let’s talk about<br /><i>your occasion.</i></h2><p className="mt-6 max-w-[470px] text-[14px] leading-7 text-[#71635b]">Call, message us on Instagram, or send a few details through the enquiry form. We’ll follow up directly to talk about what would make sense for your event.</p><p className="mt-8 text-[12px] text-[#766a60]">Serving {content.serviceArea}.</p></div>
           <div className="space-y-4">
-            <a href={phoneHref} className="group flex items-center justify-between border-y border-[#d8cfc3] py-7 transition-colors hover:border-[#a54e5b]"><span><span className="eyebrow block text-[#a54e5b]">Call us</span><span className="serif mt-2 block text-[32px] md:text-[40px]">{content.contactPhone}</span><span className="mt-2 block text-[12px] text-[#796d63]">Tap to call BlessTivals</span></span><span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#c6b8a9] transition-all group-hover:border-[#a54e5b] group-hover:bg-[#a54e5b] group-hover:text-white"><Phone size={17} /></span></a>
-            <a href={content.instagramUrl} target="_blank" rel="noreferrer" className="group flex items-center justify-between border-b border-[#d8cfc3] py-7 transition-colors hover:border-[#a54e5b]"><span><span className="eyebrow block text-[#a54e5b]">Find us on Instagram</span><span className="serif mt-2 block text-[32px] md:text-[40px]">{content.instagramHandle}</span><span className="mt-2 block text-[12px] text-[#796d63]">Open the BlessTivals Instagram profile</span></span><span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#c6b8a9] transition-all group-hover:border-[#a54e5b] group-hover:bg-[#a54e5b] group-hover:text-white"><Instagram size={17} /></span></a>
+            <a href={phoneHref} className="group flex items-center justify-between border-y border-[#d8cfc3] py-7 transition-colors hover:border-[#a54e5b]"><span><span className="eyebrow block text-[#a54e5b]">Call us</span><span className="serif mt-2 block text-[32px] md:text-[40px]">{content.contactPhone}</span><span className="mt-2 block text-[12px] text-[#796d63]">Tap to call BLESSTIVALS</span></span><span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#c6b8a9] transition-all group-hover:border-[#a54e5b] group-hover:bg-[#a54e5b] group-hover:text-white"><Phone size={17} /></span></a>
+            <a href={content.instagramUrl} target="_blank" rel="noreferrer" className="group flex items-center justify-between border-b border-[#d8cfc3] py-7 transition-colors hover:border-[#a54e5b]"><span><span className="eyebrow block text-[#a54e5b]">Find us on Instagram</span><span className="serif mt-2 block text-[32px] md:text-[40px]">{content.instagramHandle}</span><span className="mt-2 block text-[12px] text-[#796d63]">Open the BLESSTIVALS Instagram profile</span></span><span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#c6b8a9] transition-all group-hover:border-[#a54e5b] group-hover:bg-[#a54e5b] group-hover:text-white"><Instagram size={17} /></span></a>
           </div>
         </div>
       </section>
@@ -434,7 +434,7 @@ function ClerkRoutes() {
         signIn: {
           start: {
             title: 'Welcome back',
-            subtitle: 'Sign in to manage the BlessTivals website and enquiries.',
+            subtitle: 'Sign in to manage the BLESSTIVALS website and enquiries.',
           },
         },
         signUp: {
