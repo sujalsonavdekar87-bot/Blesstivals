@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { useClerk } from '@clerk/react';
+import { useLocation } from 'wouter';
 import {
   useGetPublicContent,
   useListAdminInquiries,
@@ -22,6 +24,7 @@ import {
   Inbox,
   Instagram,
   LoaderCircle,
+  LogOut,
   Mail,
   MapPin,
   MessageSquareText,
@@ -57,6 +60,14 @@ function messageFromError(error: unknown, fallback: string) {
     if (typeof message === 'string') return message;
   }
   return fallback;
+}
+
+function httpStatus(error: unknown) {
+  if (typeof error === 'object' && error !== null && 'status' in error) {
+    const status = (error as { status?: unknown }).status;
+    return typeof status === 'number' ? status : undefined;
+  }
+  return undefined;
 }
 
 function Field({
@@ -161,6 +172,7 @@ function statusTone(status: InquiryStatus) {
 
 export function AdminPage() {
   const queryClient = useQueryClient();
+  const { signOut } = useClerk();
   const contentQuery = useGetPublicContent();
   const inquiriesQuery = useListAdminInquiries();
   const saveContent = useUpdateAdminContent();
@@ -180,6 +192,7 @@ export function AdminPage() {
   const [search, setSearch] = useState('');
   const [selectedInquiryId, setSelectedInquiryId] = useState<number | null>(null);
   const [inquiryMutationError, setInquiryMutationError] = useState('');
+  const [, setLocation] = useLocation();
 
   useEffect(() => {
     if (contentQuery.data && (draft === null || !draftDirty)) {
@@ -311,6 +324,30 @@ export function AdminPage() {
     { id: 'inquiries', label: 'Inquiries', icon: Inbox },
   ];
 
+  const accessStatus = inquiriesQuery.isError
+    ? httpStatus(inquiriesQuery.error)
+    : undefined;
+  if (accessStatus === 403 || accessStatus === 503) {
+    return (
+      <main className="flex min-h-[100dvh] items-center justify-center bg-[#f4efe6] px-5 py-12 text-[#3b2b2b]">
+        <section className={`${cardClass} w-full max-w-lg p-7 sm:p-9`}>
+          <p className="text-[10px] font-bold uppercase tracking-[.2em] text-[#a54e5b]">BlessTivals / Admin</p>
+          <h1 className="mt-4 font-serif text-3xl">This account isn’t approved yet.</h1>
+          <p className="mt-3 text-sm leading-6 text-[#796b61]">
+            A verified email must be added to the site’s admin access list before this account can manage content or enquiries.
+          </p>
+          <button
+            type="button"
+            onClick={() => void signOut().then(() => setLocation('/sign-in'))}
+            className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#a54e5b] px-5 text-xs font-semibold text-white hover:bg-[#8e3f4b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a54e5b]"
+          >
+            <LogOut size={15} /> Sign out
+          </button>
+        </section>
+      </main>
+    );
+  }
+
   return (
     <div className="min-h-[100dvh] bg-[#f4efe6] text-[#3b2b2b]">
       <header className="border-b border-[#e3d8c9] bg-[#faf7f0]">
@@ -328,9 +365,16 @@ export function AdminPage() {
             <span className="h-1.5 w-1.5 rounded-full bg-[#8c9a74]" />
             Website editor
           </div>
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#eee1d2] text-[11px] font-bold text-[#8a4c54]" aria-label="BlessTivals admin">
-            BT
-          </div>
+          <button
+            type="button"
+            onClick={() => void signOut().then(() => setLocation('/sign-in'))}
+            aria-label="Sign out of the BlessTivals admin"
+            title="Sign out"
+            className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[#e5d8c7] bg-[#fffdf8] px-3 text-[11px] font-semibold text-[#74675d] transition hover:border-[#a54e5b] hover:text-[#a54e5b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a54e5b]"
+          >
+            <LogOut size={15} />
+            <span>Sign out</span>
+          </button>
         </div>
       </header>
 
