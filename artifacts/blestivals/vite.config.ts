@@ -1,31 +1,26 @@
 import path from 'path';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 
-const rawPort = process.env.PORT;
+// Vite does not load .env files into process.env before evaluating the config,
+// so PORT/BASE_PATH defined in .env.development.local must be loaded explicitly.
+const fileEnv = loadEnv(
+  process.env.NODE_ENV ?? 'development',
+  import.meta.dirname,
+  '',
+);
 
-if (!rawPort) {
-  throw new Error(
-    'PORT environment variable is required but was not provided.',
-  );
-}
-
+const rawPort = process.env.PORT ?? fileEnv.PORT ?? '3000';
 const port = Number(rawPort);
 
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-const basePath = process.env.BASE_PATH;
-
-if (!basePath) {
-  throw new Error(
-    'BASE_PATH environment variable is required but was not provided.',
-  );
-}
+const basePath = process.env.BASE_PATH ?? fileEnv.BASE_PATH ?? '/';
 
 export default defineConfig({
   base: basePath,
