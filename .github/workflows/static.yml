@@ -43,13 +43,25 @@ jobs:
           PORT: 5173
           BASE_PATH: /
 
+      - name: Copy build artifacts to root if nested
+        run: |
+          if [ -d "artifacts/blesstivals/artifacts/blesstivals/dist" ]; then
+            cp -r artifacts/blesstivals/artifacts/blesstivals/dist ./dist-target
+          elif [ -d "artifacts/blesstivals/dist" ]; then
+            cp -r artifacts/blesstivals/dist ./dist-target
+          elif [ -d "blesstivals/dist" ]; then
+            cp -r blesstivals/dist ./dist-target
+          else
+            cp -r ./dist ./dist-target || cp -r **/dist ./dist-target
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'artifacts/blesstivals/dist'
+          path: './dist-target'
 
       - name: Deploy to GitHub Pages
         id: deployment
